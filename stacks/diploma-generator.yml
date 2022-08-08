@@ -34,3 +34,11 @@
         networks:
           traefiknet:
             external: true
+
+- name: Schedule periodic restart cuz of node and chrome freezy mesh
+  ansible.builtin.cron:
+    name: restart diploma-generator
+    user: root
+    hour: "*/2"
+    minute: "30"
+    job: "docker service update diploma-generator_backend --force"
