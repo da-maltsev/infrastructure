@@ -10,6 +10,7 @@
     dest: /srv/finolog/{{ item }}
   loop:
     - stripe-payouts-to-finolog.env
+    - etherscan-to-finolog.env
 
 - name: Deploy the finolog stack
   docker_stack:
@@ -32,6 +33,13 @@
                 - "traefik.docker.network=traefiknet"
             networks:
               - traefiknet
+
+          etherscan:
+            image: ghcr.io/tough-dev-school/etherscan-to-finolog
+            env_file: /srv/finolog/etherscan-to-finolog.env
+            deploy:
+              update_config:
+                failure_action: rollback
 
         networks:
           traefiknet:
