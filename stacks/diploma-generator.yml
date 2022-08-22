@@ -22,6 +22,7 @@
             image: ghcr.io/tough-dev-school/diploma-generator
             env_file: /srv/diploma-generator/diploma-generator.env
             deploy:
+              replicas: 2
               update_config:
                 failure_action: rollback
               labels:
