@@ -10,7 +10,8 @@
     dest: /srv/finolog/{{ item }}
   loop:
     - stripe-payouts-to-finolog.env
-    - etherscan-to-finolog.env
+    - etherscan-to-finolog-01.env
+    - etherscan-to-finolog-02.env
 
 - name: Deploy the finolog stack
   docker_stack:
@@ -34,9 +35,16 @@
             networks:
               - traefiknet
 
-          etherscan:
+          etherscan-01:
             image: ghcr.io/tough-dev-school/etherscan-to-finolog
-            env_file: /srv/finolog/etherscan-to-finolog.env
+            env_file: /srv/finolog/etherscan-to-finolog-01.env
+            deploy:
+              update_config:
+                failure_action: rollback
+
+          etherscan-02:
+            image: ghcr.io/tough-dev-school/etherscan-to-finolog
+            env_file: /srv/finolog/etherscan-to-finolog-02.env
             deploy:
               update_config:
                 failure_action: rollback
