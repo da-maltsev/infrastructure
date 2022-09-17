@@ -1,0 +1,34 @@
+---
+- name: Make sure anonymous dump directory exists
+  ansible.builtin.file:
+    path: /root/anonymous_dump
+    state: directory
+    owner: root
+    mode: "0700"
+
+- name: Upload anonymizing script
+  ansible.builtin.template:
+    src: templates/anonymous_dump/dump.sh
+    dest: /root/anonymous_dump/dump.sh
+    mode: "0777"
+
+- name: Make sure config directory exists
+  ansible.builtin.file:
+    path: /root/anonymous_dump/config
+    state: directory
+    owner: root
+    mode: "0777"
+
+- name: Upload datanymizer config
+  ansible.builtin.copy:
+    src: templates/anonymous_dump/config.yml
+    dest: /root/anonymous_dump/config/config.yml
+
+- name: Add dump to crontab
+  ansible.builtin.cron:
+    name: create_anonymized_dump
+    user: root
+    hour: '*'
+    minute: 9
+    job: "/root/anonymous_dump/dump.sh"
+

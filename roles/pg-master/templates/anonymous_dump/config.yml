@@ -1,0 +1,121 @@
+filter:
+  data:
+    except:
+      - public.a12n_passwordlessauthtoken
+      - public.authtoken_token
+      - public.axes_accessattempt
+      - public.axes_accessfailurelog
+      - public.axes_accesslog
+      - public.banking_receipt
+      - public.django_admin_log
+      - public.django_session
+      - public.mailing_emaillogentry
+      - public.stripebank_stripenotification
+      - public.tinkoff_creditnotification
+      - public.tinkoff_dolyamenotification
+      - public.tinkoff_paymentnotification
+
+
+tables:
+  - name: public.users_user
+    query:
+      transform_condition: "NOT (username='f213')"
+
+    rules:
+      first_name:
+        first_name:
+          locale: RU
+
+      first_name_en:
+        first_name:
+          locale: EN
+
+      last_name:
+        last_name:
+          locale: RU
+
+      last_name_en:
+        last_name:
+          locale: EN
+
+      username:
+        template:
+          format: "{{_1}}{{_2}}"
+          rules:
+            - username: {}
+            - random_num:
+                min: 100
+                max: 999
+
+      github_username:
+        template:
+          format: "{{_1}}{{_2}}"
+          rules:
+            - username: {}
+            - random_num:
+                min: 100
+                max: 999
+
+      linkedin_username:
+        template:
+          format: "{{_1}}{{_2}}"
+          rules:
+            - username: {}
+            - random_num:
+                min: 100
+                max: 999
+      email:
+        email:
+          uniq:
+            required: true
+            try_count: 128
+
+      uuid:
+        uuid: ~
+
+      password:
+        plain: ''
+
+  - name: public.orders_promocode
+    rules:
+      name:
+        password: {}
+      discount_percent:
+        random_num:
+          min: 10
+          max: 20
+      comment:
+        paragraph:
+          locale: RU
+          min: 1
+          max: 1
+
+  - name: public.orders_order
+    rules:
+      price:
+        template:
+          format: "{{_1}}000.00"
+          rules:
+            - random_num:
+                min: 1
+                max: 99
+
+  - name: public.diplomas_diploma
+    rules:
+      slug:
+        password: {}
+      image:
+        template:
+          format: "diplomas/{{_1}}.png"
+          rules:
+            - uuid: ~
+
+  - name: public.homework_answer
+    rules:
+      slug:
+        uuid: ~
+
+  - name: public.homework_question
+    rules:
+      slug:
+        uuid: ~
