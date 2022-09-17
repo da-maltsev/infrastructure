@@ -31,6 +31,8 @@
   roles:
     - name: pg-master
       tags: postgres
+    - name: mongodb-server
+      tags: mongodb
     - name: rabbitmq-server
       tags: rabbitmq
     - name: redis-server

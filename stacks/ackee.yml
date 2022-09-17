@@ -20,8 +20,10 @@
       - version: "3.6"
         services:
           backend:
-            image: electerious/ackee:3.3.1
+            image: electerious/ackee:3.4.1
             env_file: /srv/ackee/ackee.env
+            environment:
+              ACKEE_MONGODB: "mongodb://{{ ackee_mongodb_user }}:{{ ackee_mongodb_password }}@{{ mongodb_host }}/{{ ackee_mongodb_database }}"
             deploy:
               update_config:
                 failure_action: rollback
