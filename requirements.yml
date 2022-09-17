@@ -4,6 +4,7 @@ roles:
   - geerlingguy.security
   - geerlingguy.redis
   - datadog.datadog
+  - gabops.papertrail
 collections:
   - community.general
   - community.docker

@@ -56,7 +56,7 @@
 
           logs:
             image: gliderlabs/logspout:v3.2.14
-            command: "{{ log_destination }}"
+            command: "syslog+tls://{{ papertrail_host }}:{{ papertrail_port }}"
             deploy:
               mode: global
             volumes:

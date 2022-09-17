@@ -8,3 +8,16 @@ dependencies:
     vars:
       security_ssh_permit_root_login: "no"
       security_ssh_password_authentication: "no"
+  - role: gabops.papertrail
+    vars:
+      papertrail_version: "0.21"
+      papertrail_destination_host: "{{ papertrail_host }}"
+      papertrail_destination_port: "{{ papertrail_port }}"
+      papertrail_config_file_path: /etc/log_files.yml
+      papertrail_files_to_log:
+        - /var/log/*.log
+        - /var/log/dmesg
+        - /var/log/syslog
+        - /var/log/mongod/mongod.log
+        - /var/log/postgresql/*-main.log
+        - /var/log/rabbitmq/rabbit@db.log
