@@ -18,9 +18,6 @@ filter:
 
 tables:
   - name: public.users_user
-    query:
-      transform_condition: "NOT (username='f213')"
-
     rules:
       first_name:
         first_name:
@@ -44,37 +41,26 @@ tables:
           rules:
             - username: {}
             - random_num:
-                min: 100
-                max: 999
+                min: 10000
+                max: 99999
 
       github_username:
-        template:
-          format: "{{_1}}{{_2}}"
-          rules:
-            - username: {}
-            - random_num:
-                min: 100
-                max: 999
+        plain: ''
 
       linkedin_username:
-        template:
-          format: "{{_1}}{{_2}}"
-          rules:
-            - username: {}
-            - random_num:
-                min: 100
-                max: 999
+        plain: ''
+
       email:
         email:
           uniq:
             required: true
-            try_count: 128
+            try_count: 256
 
       uuid:
         uuid: ~
 
       password:
-        plain: ''
+        plain: 'pbkdf2_sha256$260000$WBNtFNEdlsrbZa2mqpBpol$wyCzZGT29ANo7IaYAaHELRu9uCF3IlTFr7Uge1rbRRg='
 
   - name: public.orders_promocode
     rules:
