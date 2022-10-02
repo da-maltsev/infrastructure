@@ -38,7 +38,7 @@
           backup:
             image: vikasy/mongodump-s3
             environment:
-              BACKUP_CRON_SCHEDULE: "0 30 */6 * * *"
+              BACKUP_CRON_SCHEDULE: "30 6 * * *"
               MONGO_URI: "mongodb://{{ ackee_mongodb_user }}:{{ ackee_mongodb_password }}@{{ mongodb_host }}/{{ ackee_mongodb_database }}"
               AWS_S3_ENDPOINT: "{{ backup_s3_endpoint }}"
               S3_BUCKET: "{{ backup_s3_bucket }}"
