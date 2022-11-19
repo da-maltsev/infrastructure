@@ -29,7 +29,8 @@ if [ $filesize -le 10000 ]; then
   exit 127
 fi;
 
-chown circle /home/circle/anon_production_dump.sql.gz
+chown circle $DST
+rm -f $dump
 
 echo Compressed dump saved to to $DST
 echo Final size is $(numfmt --to=si $filesize)
