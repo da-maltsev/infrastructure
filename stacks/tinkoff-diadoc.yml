@@ -1,0 +1,27 @@
+---
+- name: Make sure stack directory is present
+  file:
+    path: /srv/tinkoff-diadoc
+    state: directory
+
+- name: Deploy environment files
+  template:
+    src: env/{{ item }}
+    dest: /srv/tinkoff-diadoc/{{ item }}
+  loop:
+    - tinkoff-diadoc.env
+
+- name: Deploy the invoice stack
+  docker_stack:
+    name: tinkoff-diadoc
+    resolve_image: never
+    with_registry_auth: true
+    compose:
+      - version: "3.6"
+        services:
+          service:
+            image: ghcr.io/tough-dev-school/tinkoff-diadoc
+            env_file: /srv/tinkoff-diadoc/tinkoff-diadoc.env
+            deploy:
+              update_config:
+                failure_action: rollback
