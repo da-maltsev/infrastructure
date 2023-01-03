@@ -11,4 +11,4 @@
 - include_tasks: stacks/diploma-generator.yml
 - include_tasks: stacks/finolog.yml
 - include_tasks: stacks/tinkoff-diadoc.yml
-
+- include_tasks: stacks/telegram.yml

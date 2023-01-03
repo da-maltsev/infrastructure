@@ -1,0 +1,38 @@
+---
+- name: Make sure stack directory is present
+  file:
+    path: /srv/telegram
+    state: directory
+
+- name: Deploy environment files
+  template:
+    src: env/{{ item }}
+    dest: /srv/telegram/{{ item }}
+  loop:
+    - tg-antispam.env
+
+- name: Deploy the telegram stack
+  docker_stack:
+    name: telegram
+    resolve_image: never
+    with_registry_auth: true
+    compose:
+      - version: "3.6"
+        services:
+          antispam:
+            image: ghcr.io/f213/channel-discussion-antispam-bot
+            env_file: /srv/telegram/tg-antispam.env
+            deploy:
+              update_config:
+                failure_action: rollback
+              labels:
+                - "traefik.enable=true"
+                - "traefik.port=8000"
+                - "traefik.frontend.rule=Host:{{ tg_antispam_bot_name }}.tough-dev.school"
+                - "traefik.docker.network=traefiknet"
+            networks:
+              - traefiknet
+
+        networks:
+          traefiknet:
+            external: true
