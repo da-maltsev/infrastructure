@@ -45,7 +45,7 @@
               S3_PATH: "ackee"
               AWS_ACCESS_KEY_ID: "{{ backup_s3_access_key_id }}"
               AWS_SECRET_ACCESS_KEY: "{{ backup_s3_secret_access_key }}"
-              SLACK_URI: "https://hc-ping.com/33b61b2b-3bd7-4049-b019-b4a9e75593c4"
+              SLACK_URI: "https://sb-ping.ru/F4RftnbKrieKTz7RtTV7j7"
 
         networks:
           traefiknet:

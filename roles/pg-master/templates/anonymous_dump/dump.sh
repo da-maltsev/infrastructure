@@ -35,5 +35,5 @@ rm -f $dump
 echo Compressed dump saved to to $DST
 echo Final size is $(numfmt --to=si $filesize)
 
-echo Pinging healthchecks.io...
-curl https://hc-ping.com/d8870f50-f07a-4feb-986a-53e4362f5367
+echo Pinging safe-backup.ru...
+curl https://sb-ping.ru/EEEgTQ6PzsTrVyVb6bH6yi

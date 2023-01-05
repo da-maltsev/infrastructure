@@ -148,11 +148,11 @@
                 - "traefik.docker.network=traefiknet"
 
           postgres-backup:
-            image: f213/postgres-backup-s3
+            image: f213/postgres-backup-s3:1.0.0
             environment:
               SCHEDULE: 0 30 */6 * * * # every 6 hours at HH:30
               S3_PREFIX: app-postgres
-              HEALTHCHECKS_IO_CHECK_ID: 0aaac656-5eeb-490c-a794-5c813b89eadd
+              SUCCESS_WEBHOOK: https://sb-ping.ru/SKQdta8LDwkzfWCnxytAte
               POSTGRES_DATABASE: "{{ app_postgresql_database }}"
               POSTGRES_USER: "{{ app_postgresql_user }}"
               POSTGRES_PASSWORD: "{{ app_postgresql_password }}"
