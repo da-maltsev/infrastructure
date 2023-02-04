@@ -91,7 +91,7 @@
             image: ghcr.io/tough-dev-school/monolith-scheduler
 
           lms:
-            image: ghcr.io/tough-dev-school/lms-frontend
+            image: ghcr.io/tough-dev-school/lms-frontend-v2
             environment:
               BACKEND_URL: http://app_backend:8000
             deploy:
