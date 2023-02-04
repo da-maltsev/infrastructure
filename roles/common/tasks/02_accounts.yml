@@ -10,6 +10,7 @@
   loop:
     - f213
     - samat
+    - nkiryanov
 
 - name: Add ssh keys
   ansible.posix.authorized_key:
@@ -20,6 +21,8 @@
       key: https://github.com/f213.keys
     - username: samat
       key: https://github.com/gsamat.keys
+    - username: nkiryanov
+      key: https://github.com/nkiryanov.keys
   loop_control:
     label: "{{ item.username }}"
 
