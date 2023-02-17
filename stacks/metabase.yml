@@ -33,11 +33,10 @@
               - traefiknet
 
           postgres-backup:
-            image: f213/postgres-backup-s3
+            image: f213/postgres-backup-s3:1.0.0
             environment:
               SCHEDULE: 0 30 */6 * * * # every 6 hours at HH:30
               S3_PREFIX: metabase-postgres
-              HEALTHCHECKS_IO_CHECK_ID: 9d1a7a51-6d3c-4c7e-bb9c-ff0ec8dd0d94
               POSTGRES_DATABASE: "{{ metabase_postgresql_database }}"
               POSTGRES_USER: "{{ metabase_postgresql_user }}"
               POSTGRES_PASSWORD: "{{ metabase_postgresql_password }}"
@@ -47,6 +46,7 @@
               S3_ACCESS_KEY_ID: "{{ backup_s3_access_key_id }}"
               S3_SECRET_ACCESS_KEY: "{{ backup_s3_secret_access_key }}"
               S3_BUCKET: "{{ backup_s3_bucket }}"
+              SUCCESS_WEBHOOK: "https://sb-ping.ru/8J6PP9Htey8iqME5D3E2x4"
 
         networks:
           traefiknet:
