@@ -13,7 +13,7 @@
       - version: "3.6"
         services:
           backend:
-            image: metabase/metabase:v0.42.4
+            image: metabase/metabase:v0.45.3
             environment:
               JAVA_TIMEZONE: "Europe/Moscow"
               MB_DB_TYPE: postgres
