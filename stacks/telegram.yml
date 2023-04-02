@@ -36,3 +36,12 @@
         networks:
           traefiknet:
             external: true
+
+- name: Schedule periodic telegram service restart
+  ansible.builtin.cron:
+    name: restart tg anitspam service
+    user: root
+    hour: '5'
+    minute: 15
+    job: "docker service update --force telegram_antispam"
+
