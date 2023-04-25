@@ -1,0 +1,29 @@
+---
+- name: Make sure stack directory is present
+  file:
+    path: /srv/sentry-spike-bender
+    state: directory
+
+- name: Deploy environment files
+  template:
+    src: env/{{ item }}
+    dest: /srv/sentry-spike-bender/{{ item }}
+  loop:
+    - sentry-spike-bender.env
+
+- name: Deploy the sentry-spike-bender stack
+  docker_stack:
+    name: sentry-spike-bender
+    resolve_image: never
+    with_registry_auth: true
+    compose:
+      - version: "3.6"
+        services:
+          backend:
+            image: "ghcr.io/fandsdev/sentry-spike-bender"
+            env_file: /srv/sentry-spike-bender/sentry-spike-bender.env
+            environment:
+              EVENT_PER_DAY_LIMIT: 1000
+            deploy:
+              update_config:
+                failure_action: rollback
