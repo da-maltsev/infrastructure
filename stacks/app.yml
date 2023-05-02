@@ -11,6 +11,7 @@
   loop:
     - app.env
     - app-dynamic.env
+    - notion-middleware.env
 
 - name: Deploy keys
   template:
@@ -75,6 +76,13 @@
             networks:
               - stacknet
               - traefiknet
+
+          notion-middleware:
+            image: ghcr.io/tough-dev-school/notion-middleware
+            env_file:
+              - /srv/app/notion-middleware.env
+            networks:
+              - stacknet
 
           worker:
             <<: *defaults
