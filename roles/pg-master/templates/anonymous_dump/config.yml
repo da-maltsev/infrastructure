@@ -52,6 +52,7 @@ tables:
 
       email:
         email:
+          prefix: 8
           uniq:
             required: true
             try_count: 256
@@ -70,7 +71,7 @@ tables:
         random_num:
           min: 10
           max: 20
-      comment:
+      destination:
         paragraph:
           locale: RU
           min: 1
