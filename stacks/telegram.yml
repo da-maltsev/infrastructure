@@ -20,7 +20,7 @@
       - version: "3.6"
         services:
           antispam:
-            image: ghcr.io/f213/channel-discussion-antispam-bot
+            image: ghcr.io/f213/discussion-sentinel-bot
             env_file: /srv/telegram/tg-antispam.env
             deploy:
               update_config:
