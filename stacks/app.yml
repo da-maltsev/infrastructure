@@ -94,6 +94,16 @@
               <<: *deploy
               replicas: 2
 
+          amocrm-worker:
+            <<: *defaults
+            image: ghcr.io/tough-dev-school/monolith-worker
+            environment:
+              QUEUE: amocrm
+              concurrency: 4
+            deploy:
+              <<: *deploy
+              replicas: 1
+
           scheduler:
             <<: *defaults
             image: ghcr.io/tough-dev-school/monolith-scheduler
